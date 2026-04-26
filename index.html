@@ -40,41 +40,49 @@
         </section>
     </div>
 
-    <script>
-        const username = 'DevCarlosMoura';
-        const repoContainer = document.getElementById('repo-list');
+<script>
+    const username = 'DevCarlosMoura';
+    const repoContainer = document.getElementById('repo-list');
 
-        async function fetchRepos() {
-            try {
-                const response = await fetch(`https://api.github.com/users/${DevCarlosMoura}/repos?sort=updated`);
-                const repos = await response.json();
+    async function fetchRepos() {
+        try {
+            const response = await fetch(`https://api.github.com/users/${DevCarlosMoura}/repos?sort=updated&per_page=100`);
+            
+            if (!response.ok) throw new Error('Falha na rede');
+            
+            const repos = await response.json();
+            repoContainer.innerHTML = ''; 
 
-                repoContainer.innerHTML = ''; 
+            repos.forEach(repo => {
+                const lang = repo.language ? repo.language.toLowerCase() : "";
+                const isJavaOrPython = lang === "java" || lang === "python";
+                const isNotSiteRepo = repo.name.toLowerCase() !== `${username.toLowerCase()}.github.io`;
 
-                repos.forEach(repo => {
-                    const lang = repo.language ? repo.language.toLowerCase() : '';
-                    if (!repo.fork && (lang === 'java' || lang === 'python')) {
-                        const card = `
-                            <div class="card">
-                                <h3>${repo.name}</h3>
-                                <p>${repo.description || "Projeto desenvolvido com foco em robustez e eficiência."}</p>
-                                <span>Linguagem: ${repo.language}</span>
-                                <br>
-                                <a href="${repo.html_url}" target="_blank">Ver Repositório →</a>
-                            </div>
-                        `;
-                        repoContainer.innerHTML += card;
-                    }
-                });
-                if (repoContainer.innerHTML ===''){
-                    repoContainer.innerHTML = '<p>Ops! Nenhum projeto em Java ou Python encontrado!</p>';
+                if (!repo.fork && isNotSiteRepo && isJavaOrPython) {
+                    const card = `
+                        <div class="card">
+                            <h3>${repo.name.replace(/-/g, ' ')}</h3>
+                            <p>${repo.description || "Projeto focado em soluções robustas com " + repo.language + "."}</p>
+                            <span>Linguagem: ${repo.language}</span>
+                            <br>
+                            <a href="${repo.html_url}" target="_blank">Ver Repositório →</a>
+                        </div>
+                    `;
+                    repoContainer.innerHTML += card;
                 }
-            } catch (error) {
-                repoContainer.innerHTML = '<p>Erro ao carregar projetos. Visite meu GitHub direto!</p>';
-            }
-        }
+            });
 
-        fetchRepos();
-    </script>
+            if (repoContainer.innerHTML === '') {
+                repoContainer.innerHTML = '<p>Nenhum projeto Java ou Python encontrado publicamente.</p>';
+            }
+
+        } catch (error) {
+            console.error(error);
+            repoContainer.innerHTML = '<p>Erro ao conectar com o GitHub. Tente atualizar a página (F5).</p>';
+        }
+    }
+
+    fetchRepos();
+</script>
 </body>
 </html>

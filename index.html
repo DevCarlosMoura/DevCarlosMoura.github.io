@@ -52,12 +52,13 @@
                 repoContainer.innerHTML = ''; 
 
                 repos.forEach(repo => {
-                    if (!repo.fork) {
+                    const lang = repo.language ? repo.language.toLowerCase() : '';
+                    if (!repo.fork && (lang === 'java' || lang === 'python')) {
                         const card = `
                             <div class="card">
                                 <h3>${repo.name}</h3>
-                                <p>${repo.description || "Sem descrição disponível."}</p>
-                                <span>Linguagem: ${repo.language || "Mista"}</span>
+                                <p>${repo.description || "Projeto desenvolvido com foco em robustez e eficiência."}</p>
+                                <span>Linguagem: ${repo.language}</span>
                                 <br>
                                 <a href="${repo.html_url}" target="_blank">Ver Repositório →</a>
                             </div>
@@ -65,6 +66,9 @@
                         repoContainer.innerHTML += card;
                     }
                 });
+                if (repoContainer.innerHTML ===''){
+                    repoContainer.innerHTML = '<p>Ops! Nenhum projeto em Java ou Python encontrado!</p>';
+                }
             } catch (error) {
                 repoContainer.innerHTML = '<p>Erro ao carregar projetos. Visite meu GitHub direto!</p>';
             }

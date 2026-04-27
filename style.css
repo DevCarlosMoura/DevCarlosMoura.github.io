@@ -1,4 +1,25 @@
-/* Configurações Globais */
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.profile-img {
+    width: 180px;         /* Largura fixa */
+    height: 180px;        /* Altura igual para ser um quadrado perfeito */
+    object-fit: cover;    /* CORTA a imagem para caber no círculo sem esticar */
+    border-radius: 50%;   /* Transforma o quadrado num círculo */
+    border: 4px solid #58a6ff; /* Borda azul combinando com os links */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Sombra para dar destaque */
+    transition: transform 0.3s ease; /* Transição suave ao passar o mouse */
+}
+
+
+.profile-img:hover {
+    transform: scale(1.05);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -13,13 +34,11 @@ body {
     padding: 20px;
 }
 
-/* Container Principal para centralizar o conteúdo */
 .main-container {
     max-width: 900px;
     margin: 0 auto;
 }
 
-/* Cabeçalho */
 header { 
     text-align: center; 
     padding: 60px 20px; 
@@ -50,7 +69,7 @@ nav a:hover {
     color: #ffffff;
 }
 
-/* Seções Gerais */
+
 section {
     background: white;
     padding: 40px;
@@ -67,7 +86,6 @@ h2 {
     padding-bottom: 5px;
 }
 
-/* Seção Sobre Mim */
 #sobre p {
     font-size: 1.1rem;
     color: #444;
@@ -79,7 +97,6 @@ strong {
     color: #0366d6;
 }
 
-/* Grid de Projetos Automatizado */
 .grid-projetos { 
     display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
@@ -134,7 +151,6 @@ strong {
     text-decoration: underline;
 }
 
-/* Responsividade para Celulares */
 @media (max-width: 600px) {
     header { padding: 40px 15px; }
     section { padding: 20px; }

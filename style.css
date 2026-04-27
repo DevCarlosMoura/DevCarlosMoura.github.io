@@ -156,3 +156,42 @@ strong {
     section { padding: 20px; }
     nav a { display: block; margin: 10px 0; }
 }
+
+.certificados-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.cert-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e4e8;
+}
+
+.cert-item i {
+    font-size: 2rem;
+    color: #0366d6;
+}
+
+.cert-item h3 {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.cert-item p {
+    margin: 2px 0;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.cert-item a {
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: #58a6ff;
+    font-weight: bold;
+}

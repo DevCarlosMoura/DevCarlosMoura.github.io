@@ -1,4 +1,4 @@
-/* 1. RESET E CONFIGURAÇÕES GERAIS */
+
 * {
     margin: 0;
     padding: 0;
@@ -22,7 +22,7 @@ body {
     margin: 0 auto;
 }
 
-/* 2. HEADER E PERFIL */
+/* 2. HEADER E PERFIL CSS ATUALIZADO */
 header {
     text-align: center;
     padding: 40px 20px;
@@ -63,7 +63,7 @@ header p {
     font-size: 1.1rem;
 }
 
-/* 3. NAVEGAÇÃO */
+/* 3. NAV GERAL */
 nav {
     margin-top: 25px;
 }
